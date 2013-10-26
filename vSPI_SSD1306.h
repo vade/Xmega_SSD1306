@@ -18,7 +18,6 @@ All text above, and the splash screen must be included in any redistribution
 
 --11/20/2012--
 Modified to use hardware SPI on both Arduino Uno and Akafuino X by Nathan Duprey
-Only for 128x64 SSD1306 OLED Displays
 *********************************************************************/
 
 #include "Arduino.h"
@@ -98,8 +97,6 @@ class vSPI_SSD1306 : public Adafruit_GFX
 
 		int8_t dc, rst, cs;
 		uint8_t* buffer;
-		uint8_t bufferWidth;
-		uint8_t bufferHeight;
 	
 		#if defined(__AVR_XMEGA__)
 		volatile uint16_t *csport, *dcport;
@@ -110,23 +107,3 @@ class vSPI_SSD1306 : public Adafruit_GFX
 
 		void SPItransfer(uint8_t command);
  };
-
-//#define vSPI_128x64_SSD1306_LCDWIDTH 128
-//#define vSPI_128x64_SSD1306_LCDHEIGHT 64
-//
-//class vSPI_128x64_SSD1306 : public vSPI_SSD1306
-//{
-//	public:
-//		vSPI_128x64_SSD1306(int8_t CS, int8_t RESET, int8_t DC, uint8_t* buffer);
-//
-//}
-//
-//#define vSPI_128x32_SSD1306_LCDWIDTH 128
-//#define vSPI_128x32_SSD1306_LCDHEIGHT 32
-//
-//class vSPI_128x32_SSD1306 : public vSPI_SSD1306
-//{
-//	public:
-//		vSPI_128x32_SSD1306(int8_t CS, int8_t RESET, int8_t DC, uint8_t* buffer);
-//	
-//}
