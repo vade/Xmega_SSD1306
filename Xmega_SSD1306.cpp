@@ -31,7 +31,7 @@ Only for 128x64 SSD1306 OLED Displays
 #include "glcdfont.c"
 
 //a 5x7 font table
-extern uint8_t PROGMEM font[];
+//extern uint8_t PROGMEM font[];
 
 //the memory buffer for the LCD
 static uint8_t buffer[SSD1306_LCDHEIGHT * SSD1306_LCDWIDTH / 8] = { 
@@ -131,7 +131,7 @@ void Xmega_SSD1306::drawPixel(int16_t x, int16_t y, uint16_t color) {
 }
 
 
-Xmega_SSD1306::Xmega_SSD1306(int8_t CS, int8_t RESET, int8_t DC){
+Xmega_SSD1306::Xmega_SSD1306(int8_t CS, int8_t RESET, int8_t DC) : Adafruit_GFX(128, 64){
   cs = CS;
   rst = RESET;
   dc = DC;
@@ -139,7 +139,7 @@ Xmega_SSD1306::Xmega_SSD1306(int8_t CS, int8_t RESET, int8_t DC){
 
 
 void Xmega_SSD1306::begin(uint8_t vccstate) {
-  constructor(128, 64);
+//  constructor(128, 64);
 
   // set pin directions
   // SPI
