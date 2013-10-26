@@ -29,8 +29,6 @@ Only for 128x64 SSD1306 OLED Displays
 #define BLACK 0
 #define WHITE 1
 
-#define SSD1306_LCDWIDTH 128
-#define SSD1306_LCDHEIGHT 64
 
 #define SSD1306_SETCONTRAST 0x81
 #define SSD1306_DISPLAYALLON_RESUME 0xA4
@@ -76,35 +74,59 @@ Only for 128x64 SSD1306 OLED Displays
 #define SSD1306_VERTICAL_AND_RIGHT_HORIZONTAL_SCROLL 0x29
 #define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL 0x2A
 
-class Xmega_SSD1306 : public Adafruit_GFX {
- public:
+class vSPI_SSD1306 : public Adafruit_GFX
+{
+	public:
  
-  Xmega_SSD1306(int8_t CS, int8_t RESET, int8_t DC);
- 
-  void begin(uint8_t switchvcc = SSD1306_SWITCHCAPVCC);
-  void display();
-  void clearDisplay(void);
- 
-  void invertDisplay(uint8_t i);
-  void drawPixel(int16_t x, int16_t y, uint16_t color);
-  
-  void startscrollright(uint8_t start, uint8_t stop);
-  void startscrollleft(uint8_t start, uint8_t stop);
+		vSPI_SSD1306(int8_t CS, int8_t RESET, int8_t DC, uint8_t* buffer, uint8_t width, uint8_t height);
 
-  void startscrolldiagright(uint8_t start, uint8_t stop);
-  void startscrolldiagleft(uint8_t start, uint8_t stop);
-  void stopscroll(void);
+		void begin(uint8_t switchvcc = SSD1306_SWITCHCAPVCC);
+		void display();
+		void clearDisplay(void);
 
- private:
- 
-  int8_t dc, rst, cs;
-  
-  #if defined(__AVR_XMEGA__)
-  volatile uint16_t *csport, *dcport;
-  #else
-  volatile uint8_t *csport, *dcport;
-  #endif
-  uint8_t cspinmask, dcpinmask;
-  
-  void SPItransfer(uint8_t command);
+		void invertDisplay(uint8_t i);
+		void drawPixel(int16_t x, int16_t y, uint16_t color);
+
+		void startscrollright(uint8_t start, uint8_t stop);
+		void startscrollleft(uint8_t start, uint8_t stop);
+
+		void startscrolldiagright(uint8_t start, uint8_t stop);
+		void startscrolldiagleft(uint8_t start, uint8_t stop);
+		void stopscroll(void);
+
+	private:
+
+		int8_t dc, rst, cs;
+		uint8_t* buffer;
+		uint8_t bufferWidth;
+		uint8_t bufferHeight;
+	
+		#if defined(__AVR_XMEGA__)
+		volatile uint16_t *csport, *dcport;
+		#else
+		volatile uint8_t *csport, *dcport;
+		#endif
+		uint8_t cspinmask, dcpinmask;
+
+		void SPItransfer(uint8_t command);
  };
+
+//#define vSPI_128x64_SSD1306_LCDWIDTH 128
+//#define vSPI_128x64_SSD1306_LCDHEIGHT 64
+//
+//class vSPI_128x64_SSD1306 : public vSPI_SSD1306
+//{
+//	public:
+//		vSPI_128x64_SSD1306(int8_t CS, int8_t RESET, int8_t DC, uint8_t* buffer);
+//
+//}
+//
+//#define vSPI_128x32_SSD1306_LCDWIDTH 128
+//#define vSPI_128x32_SSD1306_LCDHEIGHT 32
+//
+//class vSPI_128x32_SSD1306 : public vSPI_SSD1306
+//{
+//	public:
+//		vSPI_128x32_SSD1306(int8_t CS, int8_t RESET, int8_t DC, uint8_t* buffer);
+//	
+//}
