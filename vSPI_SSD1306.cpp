@@ -75,7 +75,7 @@ void vSPI_SSD1306::begin(uint8_t vccstate)
 	SPI.begin();
 	SPI.setBitOrder(MSBFIRST);
 	SPI.setDataMode(SPI_MODE0);
-	SPI.setClockDivider(SPI_CLOCK_DIV4);
+	SPI.setClockDivider(SPI_CLOCK_DIV2); // default = SPI_CLOCK_DIV4;
 	
 	pinMode(dc, OUTPUT);
 	pinMode(cs, OUTPUT);
