@@ -36,4 +36,6 @@ and download/install that library as well
 
 --11/20/2012--
 Modified to use hardware SPI on both Arduino Uno and Akafuino X by Nathan Duprey
-Only for 128x64 SSD1306 OLED Displays
+
+--10/24/2013--
+Modified to take external buffer, and run on both 128x64 and 128x32 displays. Additional API changes by vade.
